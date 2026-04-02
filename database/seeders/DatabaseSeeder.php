@@ -16,6 +16,11 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             ProductSeeder::class,
+            StreamingAppsSeeder::class,
+            DiamondFFSeeder::class,
+            VidioSeeder::class,
+            ZepetoMlbbSeeder::class,
+            ZepetoRobuxSeeder::class,
         ]);
     }
 }

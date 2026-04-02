@@ -26,6 +26,7 @@ class User extends Authenticatable
         'preferred_payment',
         'password',
         'role',
+        'email_verified_at',
     ];
 
     /**
