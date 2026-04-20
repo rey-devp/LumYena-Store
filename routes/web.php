@@ -42,6 +42,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
     Route::resource('categories', AdminCategory::class)->except(['show']);
     Route::resource('products', AdminProduct::class)->except(['show']);
+    Route::resource('products.variations', \App\Http\Controllers\Admin\VariationController::class)->except(['show']);
 });
 
 require __DIR__.'/auth.php';

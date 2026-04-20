@@ -30,7 +30,14 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'is_active' => 'boolean',
+            'image' => 'nullable|image|max:2048',
         ]);
+
+        $imageName = null;
+        if ($request->hasFile('image')) {
+            $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('images/products'), $imageName);
+        }
 
         Product::create([
             'category_id' => $request->category_id,
@@ -39,6 +46,7 @@ class ProductController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'is_active' => $request->has('is_active'),
+            'image' => $imageName,
         ]);
 
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil ditambahkan!');
@@ -58,15 +66,24 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'is_active' => 'boolean',
+            'image' => 'nullable|image|max:2048',
         ]);
 
-        $product->update([
+        $data = [
             'category_id' => $request->category_id,
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
             'is_active' => $request->has('is_active'),
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('images/products'), $imageName);
+            $data['image'] = $imageName;
+        }
+
+        $product->update($data);
 
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil diupdate!');
     }

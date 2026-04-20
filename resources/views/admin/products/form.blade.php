@@ -7,7 +7,7 @@
     </div>
 
     <div class="admin-card">
-        <form action="{{ isset($product) ? route('admin.products.update', $product->id) : route('admin.products.store') }}" method="POST">
+        <form action="{{ isset($product) ? route('admin.products.update', $product->id) : route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @if(isset($product)) @method('PUT') @endif
             
@@ -37,8 +37,15 @@
                 </label>
             </div>
             
+            <label>Gambar Produk (Opsional)</label>
+            <input type="file" name="image" class="form-control" accept="image/*">
+            @if(isset($product) && $product->image)
+                <div style="margin-top: 10px; margin-bottom: 15px;">
+                    <img src="{{ asset('images/products/' . $product->image) }}" alt="Preview" style="max-height: 100px;">
+                </div>
+            @endif
+
             <button type="submit" class="btn-admin mt-3">Simpan Produk</button>
-            <p style="font-size:0.8rem; margin-top:20px; color:#888;">*Catatan: Gambar (images) saat ini kelola manual di folder public/images/products. Sesuaikan nama secara manual jika upload dari cPanel/FTP untuk kemudahan.</p>
         </form>
     </div>
 @endsection

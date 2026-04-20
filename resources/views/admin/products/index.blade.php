@@ -57,6 +57,9 @@
                     </td>
                     <td class="p-4">
                         <div class="flex items-center justify-center gap-2">
+                            <a href="{{ route('admin.products.variations.index', $product->id) }}" class="p-2 border-2 border-purple-400 bg-white text-purple-500 rounded-lg hover:bg-purple-500 hover:text-white hover:shadow-[0_2px_0_#9333ea] transition-all transform hover:-translate-y-0.5 group" title="Kelola Variasi">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                            </a>
                             <a href="{{ route('admin.products.edit', $product->id) }}" class="p-2 border-2 border-[#00d2d3] bg-white text-[#00d2d3] rounded-lg hover:bg-[#00d2d3] hover:text-white hover:shadow-[0_2px_0_#0abde3] transition-all transform hover:-translate-y-0.5 group" title="Edit Data">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                             </a>
