@@ -7,7 +7,7 @@
     <link rel="icon" type="image/jpeg" href="{{ asset('images/mascot.jpg') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-lumyena-light font-nunito flex min-h-screen antialiased text-lumyena-text overflow-x-hidden">
+<body class="bg-lumyena-light font-nunito flex flex-col md:flex-row min-h-screen antialiased text-lumyena-text overflow-x-hidden">
 
     <!-- Sidebar (Desktop & Mobile Panel) -->
     <aside class="w-64 bg-lumyena-primary text-white shadow-[4px_0_15px_rgba(255,20,147,0.2)] flex flex-col shrink-0 relative z-20">
