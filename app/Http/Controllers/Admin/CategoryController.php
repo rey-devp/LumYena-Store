@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:categories,name',
             'icon' => 'nullable|string|max:50',
         ]);
 
@@ -44,7 +44,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
             'icon' => 'nullable|string|max:50',
         ]);
 
@@ -59,6 +59,10 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        if ($category->products()->count() > 0) {
+            return redirect()->route('admin.categories.index')->with('error', 'Kategori tidak bisa dihapus karena masih menampung produk aktif.');
+        }
+
         $category->delete();
         return redirect()->route('admin.categories.index')->with('success', 'Kategori dihapus.');
     }

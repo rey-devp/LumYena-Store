@@ -88,10 +88,10 @@
                     @enderror
                 </div>
 
-                <!-- Streaming Username -->
+                <!-- Streaming Email -->
                 <div class="mb-6">
-                    <label for="streaming_username" class="block font-bold text-lumyena-muted mb-2 text-sm">Username App / Email Streaming</label>
-                    <input id="streaming_username" type="text" name="streaming_username" value="{{ old('streaming_username') }}" class="w-full bg-lumyena-light border-2 border-lumyena-border rounded-xl px-4 py-3 text-lumyena-text font-semibold focus:ring-4 focus:ring-lumyena-primary/20 focus:border-lumyena-primary outline-none transition" placeholder="Contoh: netflix@email.com">
+                    <label for="streaming_username" class="block font-bold text-lumyena-muted mb-2 text-sm">Email Akun Streaming</label>
+                    <input id="streaming_username" type="email" name="streaming_username" value="{{ old('streaming_username') }}" class="w-full bg-lumyena-light border-2 border-lumyena-border rounded-xl px-4 py-3 text-lumyena-text font-semibold focus:ring-4 focus:ring-lumyena-primary/20 focus:border-lumyena-primary outline-none transition" placeholder="Contoh: email@gmail.com">
                     @error('streaming_username')
                         <span class="text-sm font-bold text-red-500 mt-1 block">{{ $message }}</span>
                     @enderror

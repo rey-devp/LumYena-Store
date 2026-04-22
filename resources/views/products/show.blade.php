@@ -40,29 +40,23 @@
             
             <div class="mb-5">
                 <label class="block text-sm font-bold text-lumyena-muted mb-2">
-                    Nama Panggilan / No WhatsApp *
+                    Nama Panggilan *
                     @if(auth()->check())
                         <span class="ml-2 inline-flex items-center gap-1 text-[10px] uppercase font-extrabold text-white bg-green-500 px-2 py-0.5 rounded-full"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg> Dari Profil</span>
                     @endif
                 </label>
-                <input type="text" id="waBuyerName" required value="{{ auth()->check() ? auth()->user()->name : '' }}" class="w-full bg-lumyena-light border-2 border-lumyena-border rounded-xl px-4 py-3 text-lumyena-text font-semibold focus:ring-4 focus:ring-lumyena-primary/20 focus:border-lumyena-primary outline-none transition" placeholder="Contoh: Budi (08123...)">
+                <input type="text" id="waBuyerName" required value="{{ auth()->check() ? auth()->user()->name : '' }}" class="w-full bg-lumyena-light border-2 border-lumyena-border rounded-xl px-4 py-3 text-lumyena-text font-semibold focus:ring-4 focus:ring-lumyena-primary/20 focus:border-lumyena-primary outline-none transition" placeholder="Contoh: Budi">
             </div>
 
             @if($product->category->name == 'Streaming')
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-bold text-lumyena-muted mb-2">
-                            Username / Email {{ $product->name }} *
-                            @if(auth()->check() && auth()->user()->streaming_username)
-                                <span class="ml-2 inline-flex items-center gap-1 text-[10px] uppercase font-extrabold text-white bg-green-500 px-2 py-0.5 rounded-full"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg> Dari Profil</span>
-                            @endif
-                        </label>
-                        <input type="text" id="waUsername" required value="{{ auth()->check() ? auth()->user()->streaming_username : '' }}" class="w-full bg-lumyena-light border-2 border-lumyena-border rounded-xl px-4 py-3 text-lumyena-text font-semibold focus:ring-4 focus:ring-lumyena-primary/20 focus:border-lumyena-primary outline-none transition" placeholder="Contoh: budi@gmail.com">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-lumyena-muted mb-2">Durasi (Hari/Bulan) *</label>
-                        <input type="text" id="waDuration" required class="w-full bg-lumyena-light border-2 border-lumyena-border rounded-xl px-4 py-3 text-lumyena-text font-semibold focus:ring-4 focus:ring-lumyena-primary/20 focus:border-lumyena-primary outline-none transition" placeholder="Contoh: 1 Bulan">
-                    </div>
+                <div>
+                    <label class="block text-sm font-bold text-lumyena-muted mb-2">
+                        Email Akun {{ $product->name }} *
+                        @if(auth()->check() && auth()->user()->streaming_username)
+                            <span class="ml-2 inline-flex items-center gap-1 text-[10px] uppercase font-extrabold text-white bg-green-500 px-2 py-0.5 rounded-full"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg> Dari Profil</span>
+                        @endif
+                    </label>
+                    <input type="email" id="waUsername" required value="{{ auth()->check() ? auth()->user()->streaming_username : '' }}" class="w-full bg-lumyena-light border-2 border-lumyena-border rounded-xl px-4 py-3 text-lumyena-text font-semibold focus:ring-4 focus:ring-lumyena-primary/20 focus:border-lumyena-primary outline-none transition" placeholder="Contoh: budi@gmail.com">
                 </div>
             @else
                 <div>
@@ -187,18 +181,18 @@
                 Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
-                    text: 'Mohon isi Nama/No WhatsApp Anda!',
+                    text: 'Mohon isi Nama Panggilan Anda!',
                     confirmButtonColor: '#FF69B4',
                 });
                 return;
             }
 
             if (isStreaming) {
-                if (!document.getElementById('waUsername').value || !document.getElementById('waDuration').value) {
+                if (!document.getElementById('waUsername').value) {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Oops...',
-                        text: 'Mohon isi Username dan Durasi sebelum mengorder!',
+                        text: 'Mohon isi Email Akun sebelum mengorder!',
                         confirmButtonColor: '#FF69B4',
                     });
                     return;
@@ -265,12 +259,11 @@
 
             let message = "";
             if (category === "Streaming") {
-                const duration = document.getElementById('waDuration').value;
                 const username = document.getElementById('waUsername').value;
-                message = `Format Apk / Premium @LumYena\n` +
-                          `❁ Name + Username : ${user}\n` +
-                          `❁ Hari/Minggu/Bulan yang di pesan : ${duration}\n` +
-                          `❁ Username App : ${username}\n` +
+                message = `Format Premium App @LumYena\n` +
+                          `❁ Pembeli : ${user}\n` +
+                          `❁ Pesanan : ${product}\n` +
+                          `❁ Email : ${username}\n` +
                           `❁ Total Harga : ${price}\n` +
                           `❁ Payment : ${payment}\n` +
                           `❁ Send to @LumYena`;
